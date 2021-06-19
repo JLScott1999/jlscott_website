@@ -1,0 +1,119 @@
+name: Deploy Workflow
+
+on:
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Loading repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build --if-present
+
+      - name: Prerender pages
+        if: github.ref == 'refs/heads/main'
+        run: npm run prerender
+
+      - name: Running Tests
+        run: npm run test
+
+      - name: Upload code coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: codecoverage
+          path: |
+            coverage
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: |
+            dist
+            !*.original.html
+
+  analysis:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Loading repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Loading code coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: codecoverage
+          path: |
+            coverage
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  deploy-development:
+    name: deploy development
+    if: github.ref == 'refs/heads/develop'
+    needs: analysis
+    runs-on: ubuntu-latest
+    environment:
+      name: Development
+    steps:
+      - name: Loading dist
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -ar --delete
+          rsh: -q
+          path: dist/jlscott/browser/
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+
+  deploy-production:
+    name: deploy production
+    if: github.ref == 'refs/heads/main'
+    needs: analysis
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+    steps:
+      - name: Loading dist
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -ar --delete
+          rsh: -q
+          path: dist/jlscott/browser/
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
