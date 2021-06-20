@@ -1,1 +1,39 @@
-<p>header works!</p>
+<header class="fixed top-0 left-0 z-50 w-screen h-16 bg-white shadow-md">
+  <div class="flex items-center justify-between h-full md:mx-3">
+
+    <div class="mx-2 md:hidden">
+      <button (click)="sidebarToggle()" class="relative w-12 h-12 text-gray-500 focus:outline-none">
+        <span class="sr-only">Open main menu</span>
+        <div class="absolute block w-8 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
+            <span aria-hidden="true" [ngClass]="[sidenavOpen ? 'rotate-45' : '-translate-y-1.5']" class="block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out"></span>
+            <span aria-hidden="true" [ngClass]="{ 'opacity-0': sidenavOpen }" class="block absolute  h-0.5 w-8 bg-current transform transition duration-500 ease-in-out"></span>
+            <span aria-hidden="true" [ngClass]="[sidenavOpen ? '-rotate-45' : 'translate-y-1.5']" class="block absolute  h-0.5 w-8 bg-current transform  transition duration-500 ease-in-out"></span>
+        </div>
+      </button>
+    </div>
+
+    <div class="items-center flex-none text-primary-2-500">
+      <div class="text-4xl font-semibold"><span class="font-bold text-primary-1-500">JLS</span>cott</div>
+    </div>
+
+    <div>
+      <div class="hidden md:flex-grow md:flex">
+        <nav class="flex flex-row-reverse">
+          <app-topnav-link></app-topnav-link>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="sidebar" [ngClass]="[sidenavOpen ? 'shadow-lg' : '-translate-x-full']" class="fixed top-0 left-0 z-40 w-64 h-screen transition duration-200 ease-in-out transform md:hidden focus:outline-none">
+  <div class="flex flex-col mt-16 sidebarscroll">
+    <div class="h-full overflow-x-hidden overflow-y-hidden">
+      <ngx-simplebar class="w-full h-full bg-white">
+        <nav class="flex flex-col">
+          <app-sidenav-link></app-sidenav-link>
+        </nav>
+      </ngx-simplebar>
+    </div>
+  </div>
+</div>

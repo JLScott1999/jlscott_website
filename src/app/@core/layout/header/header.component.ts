@@ -8,9 +8,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  public sidenavOpen: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  public sidebarToggle()
+  {
+    this.sidenavOpen = !this.sidenavOpen;
+  }
+
 
 }
