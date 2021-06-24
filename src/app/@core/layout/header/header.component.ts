@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   public sidenavOpen: boolean = false;
+  public appDialogOpen: boolean = false;
 
   constructor() { }
 
@@ -20,5 +21,9 @@ export class HeaderComponent implements OnInit {
     this.sidenavOpen = !this.sidenavOpen;
   }
 
+  public appDialogToggle()
+  {
+    this.appDialogOpen = !this.appDialogOpen;
+  }
 
 }

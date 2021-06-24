@@ -1,3 +1,291 @@
-.sidebarscroll {
-  height: calc(100% - theme(topnav.hsize));
+#lsidebar {
+  @apply z-40;
+  @apply fixed;
+  @apply top-0;
+  @apply left-0;
+  @apply h-screen;
+  @apply pointer-events-none;
+}
+
+#lsidebar .wrapper {
+  @apply flex;
+  @apply flex-col;
+  @apply w-full;
+  @apply h-full;
+}
+
+#lsidebar .wrapper .header {
+  @apply z-50;
+  @apply flex;
+  @apply flex-none;
+  @apply w-64;
+  @apply h-16;
+  @apply bg-white;
+  @apply shadow;
+  @apply rounded-br-3xl;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper {
+  @apply relative flex-none w-16 h-16 text-gray-500 pointer-events-auto focus:outline-none;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger {
+  @apply absolute block w-8 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger span {
+  @apply block;
+  @apply absolute;
+  @apply h-0.5;
+  @apply w-8;
+  @apply bg-current;
+  @apply transform;
+  @apply transition;
+  @apply duration-500;
+  @apply ease-in-out;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger .top {
+  @apply -translate-y-1.5;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger.active .top {
+  @apply rotate-45;
+  @apply translate-y-0;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger .middle {
+  @apply ease-in-out;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger.active .middle {
+  @apply opacity-0;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger .bottom {
+  @apply translate-y-1.5;
+}
+
+#lsidebar .wrapper .header .burgerbtn-wrapper .burger.active .bottom {
+  @apply -rotate-45;
+  @apply translate-y-0;
+}
+
+#lsidebar .wrapper .header .logo-wrapper {
+  @apply my-auto ml-5 focus:outline-none;
+}
+
+#lsidebar .wrapper .header .logo-wrapper #logo {
+  @apply text-4xl font-semibold focus:outline-none pointer-events-auto;
+}
+
+#lsidebar .wrapper .header .logo-wrapper #logo .impact {
+  @apply font-bold;
+  @apply text-purple-800;
+}
+
+#lsidebar .wrapper #sidenav {
+  @apply flex flex-col justify-center w-16 flex-1 space-y-2 duration-300 bg-white shadow pointer-events-auto;
+}
+
+#lsidebar .wrapper #sidenav.active {
+  @apply w-[14.5rem];
+}
+
+#lsidebar .wrapper #sidenav .link {
+  @apply text-purple-400;
+  @apply cursor-pointer;
+  @apply bg-purple-50;
+  @apply hover:text-purple-600;
+  @apply hover:bg-purple-100;
+  @apply pointer-events-auto;
+  @apply focus:outline-none;
+  @apply focus:bg-purple-100;
+  @apply focus:text-purple-800;
+  @apply p-2;
+  @apply mx-2;
+  @apply duration-300;
+  @apply rounded-full;
+  @apply w-12;
+  @apply hover:w-[13.5rem];
+}
+
+#lsidebar .wrapper #sidenav.active .link {
+  @apply w-[13.5rem];
+}
+
+#lsidebar .wrapper #sidenav .link svg {
+  @apply flex-none w-8 h-8;
+}
+
+#lsidebar .wrapper #sidenav .link span {
+  @apply self-center w-full ml-2 mr-10 text-center;
+}
+
+#rsidebar {
+  @apply z-40;
+  @apply fixed;
+  @apply top-0;
+  @apply right-0;
+  @apply pointer-events-none;
+}
+
+#rsidebar .wrapper {
+  @apply shadow;
+  @apply rounded-bl-3xl;
+  @apply w-16;
+  @apply h-16;
+  @apply transition-all;
+  @apply duration-300;
+  @apply ease-in-out;
+  @apply overflow-hidden;
+}
+
+#rsidebar .wrapper.active {
+  @apply w-[448px];
+  @apply h-56;
+}
+
+#rsidebar .wrapper .header {
+  @apply flex;
+  @apply flex-row;
+  @apply justify-end;
+  @apply w-full;
+  @apply h-16;
+  @apply overflow-hidden;
+}
+
+#rsidebar .wrapper .header .text {
+  @apply text-4xl font-semibold focus:outline-none my-auto ml-4;
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper {
+  @apply ml-auto relative flex-none w-16 h-16 text-gray-500 pointer-events-auto focus:outline-none;
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app {
+  @apply absolute block w-10 h-10 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2;
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app span {
+  @apply block;
+  @apply absolute;
+  @apply h-[10px];
+  @apply w-[10px];
+  @apply border-black;
+  @apply border-2;
+  @apply transition;
+  @apply duration-500;
+  @apply ease-in-out;
+  @apply rounded-sm;
+}
+
+#rsidebar .wrapper.active .header .appbtn-wrapper .app span {
+  @apply opacity-0;
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .left {
+  @apply translate-x-0;
+}
+
+#rsidebar .wrapper.active .header .appbtn-wrapper .app .left {
+  @apply translate-x-[15px];
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .hmiddle {
+  @apply translate-x-[15px];
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .right {
+  @apply translate-x-[30px];
+}
+
+#rsidebar .wrapper.active .header .appbtn-wrapper .app .right {
+  @apply translate-x-[15px];
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .top {
+  @apply translate-y-0;
+}
+
+#rsidebar .wrapper.active .header .appbtn-wrapper .app .top {
+  @apply translate-y-[15px];
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .vmiddle {
+  @apply translate-y-[15px];
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .bottom {
+  @apply translate-y-[30px];
+}
+
+#rsidebar .wrapper.active .header .appbtn-wrapper .app .bottom {
+  @apply translate-y-[15px];
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .cross {
+  @apply block;
+  @apply absolute;
+  @apply h-0.5;
+  @apply w-10;
+  @apply bg-black;
+  @apply transform;
+  @apply transition;
+  @apply duration-500;
+  @apply ease-in-out;
+  @apply rotate-45;
+  @apply translate-y-[19px];
+  @apply opacity-0;
+}
+
+#rsidebar .wrapper.active .header .appbtn-wrapper .app .cross {
+  @apply opacity-100;
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .ctop {
+  @apply rotate-45;
+}
+
+#rsidebar .wrapper .header .appbtn-wrapper .app .cbottom {
+  @apply -rotate-45;
+}
+
+#rsidebar .wrapper .dialog {
+  @apply hidden grid-flow-row grid-cols-3 gap-4 m-4;
+}
+
+#rsidebar .wrapper.active .dialog {
+  @apply grid;
+}
+
+#rsidebar .wrapper .dialog .app {
+  @apply flex;
+  @apply flex-col;
+  @apply w-32;
+  @apply h-32;
+  @apply p-4;
+  @apply rounded-lg;
+  @apply shadow-md;
+  @apply text-purple-400;
+  @apply cursor-pointer;
+  @apply bg-purple-50;
+  @apply hover:text-purple-600;
+  @apply hover:bg-purple-100;
+  @apply pointer-events-auto;
+  @apply focus:outline-none;
+  @apply focus:bg-purple-100;
+  @apply focus:text-purple-800;
+}
+
+#rsidebar .wrapper .dialog .app .img-wrapper {
+  @apply block w-16 h-16 mx-auto;
+}
+
+#rsidebar .wrapper .dialog .app .text-wrapper {
+  @apply mx-auto mt-auto;
+}
+
+#rsidebar .wrapper .dialog .app .text-wrapper .text {
+  @apply font-semibold;
 }

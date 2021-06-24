@@ -1,39 +1,75 @@
-<header class="fixed top-0 left-0 z-50 w-screen h-16 bg-white shadow-md">
-  <div class="flex items-center justify-between h-full md:mx-3">
+<header id="lsidebar">
+  <div class="wrapper">
 
-    <div class="mx-2 md:hidden">
-      <button (click)="sidebarToggle()" class="relative w-12 h-12 text-gray-500 focus:outline-none">
+    <div class="header">
+      <button (click)="sidebarToggle()" class="burgerbtn-wrapper">
         <span class="sr-only">Open main menu</span>
-        <div class="absolute block w-8 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
-            <span aria-hidden="true" [ngClass]="[sidenavOpen ? 'rotate-45' : '-translate-y-1.5']" class="block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out"></span>
-            <span aria-hidden="true" [ngClass]="{ 'opacity-0': sidenavOpen }" class="block absolute  h-0.5 w-8 bg-current transform transition duration-500 ease-in-out"></span>
-            <span aria-hidden="true" [ngClass]="[sidenavOpen ? '-rotate-45' : 'translate-y-1.5']" class="block absolute  h-0.5 w-8 bg-current transform  transition duration-500 ease-in-out"></span>
+        <div [class.active]="sidenavOpen" class="burger">
+          <span aria-hidden="true" class="top"></span>
+          <span aria-hidden="true" class="middle"></span>
+          <span aria-hidden="true" class="bottom"></span>
         </div>
       </button>
+      <a class="logo-wrapper" href="http://localhost:4200/">
+        <div id="logo">
+          <span class="impact">JLS</span>
+          <span>cott</span>
+        </div>
+      </a>
     </div>
 
-    <div class="items-center flex-none text-primary-2-500">
-      <div class="text-4xl font-semibold"><span class="font-bold text-primary-1-500">JLS</span>cott</div>
-    </div>
+    <nav [class.active]="sidenavOpen" id="sidenav">
 
-    <div>
-      <div class="hidden md:flex-grow md:flex">
-        <nav class="flex flex-row-reverse">
-          <app-topnav-link></app-topnav-link>
-        </nav>
-      </div>
-    </div>
+      <a class="link">
+        <div class="flex flex-row overflow-hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span>Home</span>
+        </div>
+      </a>
+
+    </nav>
   </div>
 </header>
 
-<div id="sidebar" [ngClass]="[sidenavOpen ? 'shadow-lg' : '-translate-x-full']" class="fixed top-0 left-0 z-40 w-64 h-screen transition duration-200 ease-in-out transform md:hidden focus:outline-none">
-  <div class="flex flex-col mt-16 sidebarscroll">
-    <div class="h-full overflow-x-hidden overflow-y-hidden">
-      <ngx-simplebar class="w-full h-full bg-white">
-        <nav class="flex flex-col">
-          <app-sidenav-link></app-sidenav-link>
-        </nav>
-      </ngx-simplebar>
+<header id="rsidebar">
+  <div [class.active]="appDialogOpen" class="wrapper">
+    <div class="header">
+      <div class="text">Apps</div>
+      <button (click)="appDialogToggle()" class="appbtn-wrapper">
+        <div class="app">
+
+          <span aria-hidden="true" class="top left"></span>
+          <span aria-hidden="true" class="top hmiddle"></span>
+          <span aria-hidden="true" class="top right"></span>
+
+          <span aria-hidden="true" class="vmiddle left"></span>
+          <span aria-hidden="true" class="vmiddle hmiddle"></span>
+          <span aria-hidden="true" class="vmiddle right"></span>
+
+          <span aria-hidden="true" class="bottom left"></span>
+          <span aria-hidden="true" class="bottom hmiddle"></span>
+          <span aria-hidden="true" class="bottom right"></span>
+
+          <div aria-hidden="true" class="cross ctop"></div>
+          <div aria-hidden="true" class="cross cbottom"></div>
+        </div>
+      </button>
+    </div>
+    <div class="dialog">
+
+      <a class="app" href="#">
+        <div class="img-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </div>
+        <div class="text-wrapper">
+          <p class="font-semibold">Application</p>
+        </div>
+      </a>
+
     </div>
   </div>
-</div>
+</header>
